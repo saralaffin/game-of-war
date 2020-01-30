@@ -38,7 +38,60 @@ while both player have cards (
 
 
 )
+Entire game as object
+functions:
+play round function
+play war function
+
+other properties
+player 1
+player 2
+value list. (an array of values 2,3,... K,A)
+
+Notes from Noah's powerpoint:
+So in all, the whole game of war can be run with the following variables and functions (actions)
+firstPlayerDeck = [];
+secondPlayerDeck = [];
+cardDeck = [];
+spoilsOfWar = [];
+warDeclared = boolean;
+winnerOfRound = null;
+
+startGame()
+shuffle()
+distributeCards()
+conductTurn()
+addCardsInPlay()
+determineWinner()
+prepareForWar()
+assignWinnerCards()
+receiveSpoilsOfWar()
+finishTurn()
+endGame()
 
 
 
 */
+
+// some logic from my memory card game:
+//make loop to fill card array.
+//rank will become one character from array
+//change the position of the comment to add more cards
+var ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+var cards = [];
+
+//cards repeat 2 times. Change the j<2 to make more duplicates
+for (j=0; j<2; j++) {
+	for (i=0; i<ranks.length; i++) {
+		cards[i+ranks.length*j] = {
+			rank: ranks[i],
+			suit: "hearts",
+			randomNum: Math.random()
+		}
+	}
+}
+var shuffle = function(deck) {
+	return deck.sort(function(a,b){return (b.randomNum - a.randomNum)});
+}
+
+cards = shuffle(cards);
