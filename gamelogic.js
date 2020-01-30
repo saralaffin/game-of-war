@@ -98,5 +98,16 @@ var shuffle = function(deck) {
 
 cards = shuffle(cards);
 
-var cardsP1 = cards.subarray(0,26)
-var cardsP2 = cards.subarray(26)
+var cardsP1 = []
+var cardsP2 = [];
+
+for (i = 0; i <cards.length; i++) {
+    if (i%2 == 0) {
+        cardsP1.push(cards[i])
+    } else {
+        cardsP2.push(cards[i])
+    }
+}
+
+console.log(cardsP1)
+console.log(cardsP2)
