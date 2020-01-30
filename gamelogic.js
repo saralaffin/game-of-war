@@ -73,10 +73,8 @@ endGame()
 
 */
 
-// some logic from my memory card game:
-//make loop to fill card array.
-//rank will become one character from array
-//change the position of the comment to add more cards
+// some logic from my memory card game: (edited to suit this game)
+
 let ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
 let suits = ["hearts","spades","clubs","diamonds"]
 let cards = [];
@@ -93,13 +91,13 @@ for (let j=0; j<4; j++) {
 }
 
 //each entry in the cards array is an object so in the sort function, a and b refer to each object entry and .randomNumber calls that property and sorts the cards array based on its random number.
-var shuffle = function(deck) {
+function shuffle(deck) {
 	return deck.sort(function(a,b){return (b.randomNum - a.randomNum)});
 }
 
 cards = shuffle(cards);
 
-var cardsP1 = []
+let cardsP1 = []
 let cardsP2 = [];
 
 for (i = 0; i <cards.length; i++) {
@@ -110,19 +108,31 @@ for (i = 0; i <cards.length; i++) {
     }
 }
 
-console.log(cardsP1[0])
-console.log(cardsP2[0])
-
-let handP1 = cardsP1[0]
-cardsP1.shift()
-let handP2 = cardsP2[0]
-cardsP2.shift()
-
+//zakk suggested game object when zack was asking a question
+let game = {
+    deckP1: cardsP1, //an array of objects
+    deckP2: cardsP2,
+    handP1: [], //single object, or subarray of objects
+    handP2: [],
+    flipCards: function() {
+        this.handP1 = cardsP1[0]
+        this.cardsP1.shift()
+        this.handP2 = cardsP2[0]
+        this.cardsP2.shift()
+    },
+    warCards: function(n=3) { //pass in n number of cards to take out. default 3 if both players have enough cards
+        for (let i = 0; i < n; i++) {
+            this.handP1.unshift(cardsP1[i])
+            this.cardsP1.shift()
+            this.handP2.unshift(cardsP2[i])
+            this.cardsP2.shift()
+        }
+    }
+}
 if (handP1.value>handP2.value) {
     cardsP1.push(handP1,handP2)
 } else if (handP1.value<handP2.value) {
     cardsP2.push(handP1,handP2)
+} else {
+    //WAR!
 }
-
-console.log(cardsP1.length)
-console.log(cardsP2.length)
