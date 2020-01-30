@@ -121,8 +121,22 @@ let game = {
             this.handP2.unshift(this.cardsP2[i])
             this.cardsP2.shift()
         }
-    }
-
+    },
+    compareCards: function(index=0) {
+        //return true if comparison was simple and hands assigned 
+        //return false if tied 
+        if (this.handP1[index].value > this.handP2[index].value) {
+            this.cardsP1.push(this.handP1,this.handP2)
+            return true
+        } else if (this.handP1[index].value < this.handP2[index].value) {
+            this.cardsP2.push(this.handP1,this.handP2)
+            return true
+        } else {
+            return false
+        }
+    },
+    inWar: false,
+    inWarIndex: 0
 }
 console.log(cardsP1[0])
 console.log(cardsP2[0])
@@ -133,11 +147,18 @@ console.log(game.handP1)
 console.log(game.handP2)
 
 while ((game.cardsP1.length > 0) || (game.cardsP2.length > 0) ) { //while both players have cards
-    if (game.handP1.value>game.handP2.value) {
-        game.cardsP1.push(game.handP1,game.handP2)
-    } else if (handP1.value<game.handP2.value) {
-        game.cardsP2.push(game.handP1,game.handP2)
+    if (game.compareCards(0) {}
+        game.flipCards(1)
     } else {
         //WAR!
+        if (game.inWar) {
+            compareCards(game.inWarIndex)
+        } else {
+            game.inWar = true //and assign cards to hand
+        }
+        if ( (game.cardsP1.length >= 3) && (game.cardsP2.length >= 3) ) {
+            game.flipCards(3)
+        } // else assign however many cards are left
+        //compare cards and increase index
     }
 }
