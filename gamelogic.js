@@ -77,15 +77,16 @@ endGame()
 //make loop to fill card array.
 //rank will become one character from array
 //change the position of the comment to add more cards
-var ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
-var suits = ["hearts","spades","clubs","diamonds"]
-var cards = [];
+let ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+let suits = ["hearts","spades","clubs","diamonds"]
+let cards = [];
 
-for (j=0; j<4; j++) {
-	for (i=0; i<ranks.length; i++) {
+for (let j=0; j<4; j++) {
+	for (let i=0; i<ranks.length; i++) {
 		cards[i+ranks.length*j] = {
 			rank: ranks[i],
-			suit: suits[j],
+            suit: suits[j],
+            value: i+2, //doesn't actually matter if value: i or i+2
 			randomNum: Math.random()
 		}
 	}
@@ -99,7 +100,7 @@ var shuffle = function(deck) {
 cards = shuffle(cards);
 
 var cardsP1 = []
-var cardsP2 = [];
+let cardsP2 = [];
 
 for (i = 0; i <cards.length; i++) {
     if (i%2 == 0) {
@@ -109,5 +110,19 @@ for (i = 0; i <cards.length; i++) {
     }
 }
 
-console.log(cardsP1)
-console.log(cardsP2)
+console.log(cardsP1[0])
+console.log(cardsP2[0])
+
+let handP1 = cardsP1[0]
+cardsP1.shift()
+let handP2 = cardsP2[0]
+cardsP2.shift()
+
+if (handP1.value>handP2.value) {
+    cardsP1.push(handP1,handP2)
+} else if (handP1.value<handP2.value) {
+    cardsP2.push(handP1,handP2)
+}
+
+console.log(cardsP1.length)
+console.log(cardsP2.length)
