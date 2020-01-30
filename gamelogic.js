@@ -110,29 +110,34 @@ for (i = 0; i <cards.length; i++) {
 
 //zakk suggested game object when zack was asking a question
 let game = {
-    deckP1: cardsP1, //an array of objects
-    deckP2: cardsP2,
-    handP1: [], //single object, or subarray of objects
+    cardsP1: cardsP1, //an array of objects
+    cardsP2: cardsP2,
+    handP1: [], //subarray of object(s)
     handP2: [],
-    flipCards: function() {
-        this.handP1 = cardsP1[0]
-        this.cardsP1.shift()
-        this.handP2 = cardsP2[0]
-        this.cardsP2.shift()
-    },
-    warCards: function(n=3) { //pass in n number of cards to take out. default 3 if both players have enough cards
+    flipCards: function(n=1) { //pass in n number of cards to take out, 1 usually
         for (let i = 0; i < n; i++) {
-            this.handP1.unshift(cardsP1[i])
+            this.handP1.unshift(this.cardsP1[i])
             this.cardsP1.shift()
-            this.handP2.unshift(cardsP2[i])
+            this.handP2.unshift(this.cardsP2[i])
             this.cardsP2.shift()
         }
     }
+
 }
-if (handP1.value>handP2.value) {
-    cardsP1.push(handP1,handP2)
-} else if (handP1.value<handP2.value) {
-    cardsP2.push(handP1,handP2)
-} else {
-    //WAR!
+console.log(cardsP1[0])
+console.log(cardsP2[0])
+console.log(game.handP1)
+console.log(game.handP2)
+game.warCards()
+console.log(game.handP1)
+console.log(game.handP2)
+
+while ((game.cardsP1.length > 0) || (game.cardsP2.length > 0) ) { //while both players have cards
+    if (game.handP1.value>game.handP2.value) {
+        game.cardsP1.push(game.handP1,game.handP2)
+    } else if (handP1.value<game.handP2.value) {
+        game.cardsP2.push(game.handP1,game.handP2)
+    } else {
+        //WAR!
+    }
 }
