@@ -97,21 +97,25 @@ function shuffle(deck) {
 
 cards = shuffle(cards);
 
-let cardsP1 = []
-let cardsP2 = [];
+let deckP1 = [];
+let deckP2 = [];
 
-for (i = 0; i <cards.length; i++) {
+for (let i = 0; i <cards.length; i++) {
     if (i%2 == 0) {
-        cardsP1.push(cards[i])
+        deckP1.push(cards[i])
     } else {
-        cardsP2.push(cards[i])
+        deckP2.push(cards[i])
     }
 }
 
+// console.log(deckP1)
+// console.log(deckP2)
+
+
 //zakk suggested game object when zack was asking a question
 let game = {
-    cardsP1: cardsP1, //an array of objects
-    cardsP2: cardsP2,
+    cardsP1: deckP1, //an array of objects
+    cardsP2: deckP2,
     handP1: [], //subarray of object(s)
     handP2: [],
     flipCards: function(n=1) { //pass in n number of cards to take out, 1 usually
@@ -124,12 +128,15 @@ let game = {
     },
     compareCards: function(index=0) {
         //return true if comparison was simple and hands assigned 
-        //return false if tied 
-        if (this.handP1[index].value > this.handP2[index].value) {
-            this.cardsP1.push(this.handP1,this.handP2)
+        //return false if tied game.handP1[0].value
+        console.log("i'm inside the function! ", game.handP1[0].value )
+        if (game.handP1[index].value >= game.handP2[index].value) {
+            //found how to flatten arrays here: https://www.jstips.co/en/javascript/flattening-multidimensional-arrays-in-javascript/
+            //[].concat.apply([], myArray);
+            game.cardsP1 = game.cardsP1.concat.apply([],game.handP1).concat.apply([],game.handP2)
             return true
-        } else if (this.handP1[index].value < this.handP2[index].value) {
-            this.cardsP2.push(this.handP1,this.handP2)
+        } else if (game.handP1[index].value < game.handP2[index].value) {
+            game.cardsP2 = game.cardsP2.concat.apply([],game.handP1).concat.apply([],game.handP2)
             return true
         } else {
             return false
@@ -138,27 +145,46 @@ let game = {
     inWar: false,
     inWarIndex: 0
 }
-console.log(cardsP1[0])
-console.log(cardsP2[0])
-console.log(game.handP1)
-console.log(game.handP2)
-game.warCards()
-console.log(game.handP1)
-console.log(game.handP2)
+// console.log(cardsP1[0])
+// console.log(cardsP2[0])
+// console.log(game.handP1)
+// console.log(game.handP2)
+// game.warCards()
+// console.log(game.handP1)
 
-while ((game.cardsP1.length > 0) || (game.cardsP2.length > 0) ) { //while both players have cards
-    if (game.compareCards(0) {}
+console.log("first entry in cardsP1:")
+console.log(game.cardsP1[0])
+
+game.flipCards(1)
+
+console.log("handP1 after flipCards:")
+console.log(game.handP1[0].value)
+
+// console.log(game.cardsP1)
+
+
+
+//game.flipCards(1)
+while ((game.cardsP1.length > 10) || (game.cardsP2.length > 10) ) { //while both players have cards
+    if (game.compareCards(0)) {
         game.flipCards(1)
-    } else {
+    } /* else {
         //WAR!
-        if (game.inWar) {
+        if (game.inWar && inWarIndex < 3) {
             compareCards(game.inWarIndex)
+            inWarIndex++
         } else {
             game.inWar = true //and assign cards to hand
-        }
-        if ( (game.cardsP1.length >= 3) && (game.cardsP2.length >= 3) ) {
-            game.flipCards(3)
-        } // else assign however many cards are left
+            if ( (game.cardsP1.length >= 3) && (game.cardsP2.length >= 3) ) {
+                game.flipCards(3)
+            } else {
+                // else assign however many cards are left
+                game.flipCards(Mat.max(game.cardsP1.length, game.cardsP2.length))
+            }
         //compare cards and increase index
-    }
+    }  */
 }
+
+
+console.log(game.handP1.length)
+console.log(game.handP2.length)
