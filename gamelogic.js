@@ -78,25 +78,20 @@ endGame()
 //rank will become one character from array
 //change the position of the comment to add more cards
 var ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
-var suits = ["hearts","spades","clubs","diamonds"]
 var cards = [];
 
-for (j=0; j<4; j++) {
+//cards repeat 2 times. Change the j<2 to make more duplicates
+for (j=0; j<2; j++) {
 	for (i=0; i<ranks.length; i++) {
 		cards[i+ranks.length*j] = {
 			rank: ranks[i],
-			suit: suits[j],
+			suit: "hearts",
 			randomNum: Math.random()
 		}
 	}
 }
-
-//each entry in the cards array is an object so in the sort function, a and b refer to each object entry and .randomNumber calls that property and sorts the cards array based on its random number.
 var shuffle = function(deck) {
 	return deck.sort(function(a,b){return (b.randomNum - a.randomNum)});
 }
 
 cards = shuffle(cards);
-
-var cardsP1 = cards.subarray(0,26)
-var cardsP2 = cards.subarray(26)
