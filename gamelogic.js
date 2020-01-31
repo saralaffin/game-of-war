@@ -129,14 +129,20 @@ let game = {
     compareCards: function(index=0) {
         //return true if comparison was simple and hands assigned 
         //return false if tied game.handP1[0].value
-        console.log("i'm inside the function! ", game.handP1[0].value )
-        if (game.handP1[index].value >= game.handP2[index].value) {
-            //found how to flatten arrays here: https://www.jstips.co/en/javascript/flattening-multidimensional-arrays-in-javascript/
-            //[].concat.apply([], myArray);
-            game.cardsP1 = game.cardsP1.concat.apply([],game.handP1).concat.apply([],game.handP2)
+        //console.log("i'm inside the function! ", game.handP1[0].value )
+        if (this.handP1[index].value >= this.handP2[index].value) {
+            this.cardsP1 = this.cardsP1.concat(this.handP1)
+            this.cardsP1 = this.cardsP1.concat(this.handP2)
+
+            this.handP1 = []
+            this.handP2 = []
             return true
-        } else if (game.handP1[index].value < game.handP2[index].value) {
-            game.cardsP2 = game.cardsP2.concat.apply([],game.handP1).concat.apply([],game.handP2)
+        } else if (this.handP1[index].value < this.handP2[index].value) {
+            this.cardsP2 = this.cardsP1.concat(this.handP1)
+            this.cardsP2 = this.cardsP1.concat(this.handP2)
+
+            this.handP1 = []
+            this.handP2 = []
             return true
         } else {
             return false
@@ -155,20 +161,25 @@ let game = {
 console.log("first entry in cardsP1:")
 console.log(game.cardsP1[0])
 
-game.flipCards(1)
+game.flipCards(6)
 
 console.log("handP1 after flipCards:")
-console.log(game.handP1[0].value)
-
-// console.log(game.cardsP1)
-
+console.log(game.handP1[4].value)
+console.log("length of cardsP1")
+console.log(game.cardsP1)
+console.log("length of cardsP1 after concat")
+game.cardsP1 = game.cardsP1.concat(game.handP1)
+game.cardsP1 = game.cardsP1.concat(game.handP2)
+console.log(game.cardsP1)
 
 
 //game.flipCards(1)
-while ((game.cardsP1.length > 10) || (game.cardsP2.length > 10) ) { //while both players have cards
+while (!(game.cardsP1.length === 0) && !(game.cardsP2.length === 0) ) { //while both players have cards, i.e. !not = 0
     if (game.compareCards(0)) {
-        game.flipCards(1)
-    } /* else {
+        game.flipCards(6)
+    } 
+    console.log("iteration! value of first card in hand: ",game.handP1[0].value)
+    /* else {
         //WAR!
         if (game.inWar && inWarIndex < 3) {
             compareCards(game.inWarIndex)
