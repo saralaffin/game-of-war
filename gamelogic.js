@@ -136,8 +136,8 @@ class Card {
 
 
 class Deck {
-    constructor(arr) {
-       this.cards = arr
+    constructor() {
+       this.cards = []
     }
 
     length() {
@@ -145,11 +145,13 @@ class Deck {
     }
 
     draw() {
-        return this.cards[Math.floor(Math.random()*52)]
+        card = this.cards[Math.floor(Math.random()*52)]
+        this.cards.splice(this.cards.indexOf(card),1)
+        return card
     }
 }
 
-const playDeck = new Deck([]) 
+const playDeck = new Deck() 
 
 let ranks = ['Ace','2','3','4','5','6','7','8','9','10','Jack','Queen','King'];
 let suits = ["hearts","spades","clubs","diamonds"]
