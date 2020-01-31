@@ -123,6 +123,55 @@ for (let i = 0; i <cards.length; i++) {
 // console.log(deckP2)
 
 
+
+
+class Card {
+    constructor(suit,rank,score) {
+        this.suit = suit
+        this.rank = rank
+        this.score = score
+    }
+}
+
+
+
+class Deck {
+    constructor(arr) {
+       this.cards = arr
+    }
+
+    length() {
+        return this.cards.length
+    }
+
+    draw() {
+        return this.cards[Math.floor(Math.random()*52)]
+    }
+}
+
+const playDeck = new Deck([]) 
+
+let ranks = ['Ace','2','3','4','5','6','7','8','9','10','Jack','Queen','King'];
+let suits = ["hearts","spades","clubs","diamonds"]
+
+for (let j=0; j<4; j++) {
+   for (let i=0; i<ranks.length; i++) {
+       playDeck.cards.push( new Card(ranks[i], suits[j], i))
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 //zakk suggested game object when zack was asking a question
 let game = {
     cardsP1: deckP1, //an array of objects
