@@ -138,8 +138,8 @@ let game = {
             this.handP2 = []
             return true
         } else if (this.handP1[index].value < this.handP2[index].value) {
-            this.cardsP2 = this.cardsP1.concat(this.handP1)
-            this.cardsP2 = this.cardsP1.concat(this.handP2)
+            this.cardsP2 = this.cardsP2.concat(this.handP1)
+            this.cardsP2 = this.cardsP2.concat(this.handP2)
 
             this.handP1 = []
             this.handP2 = []
@@ -157,28 +157,35 @@ let game = {
 // console.log(game.handP2)
 // game.warCards()
 // console.log(game.handP1)
-
+/*
 console.log("first entry in cardsP1:")
 console.log(game.cardsP1[0])
 
-game.flipCards(6)
+
 
 console.log("handP1 after flipCards:")
 console.log(game.handP1[4].value)
 console.log("length of cardsP1")
 console.log(game.cardsP1)
 console.log("length of cardsP1 after concat")
-game.cardsP1 = game.cardsP1.concat(game.handP1)
-game.cardsP1 = game.cardsP1.concat(game.handP2)
+// game.cardsP1 = game.cardsP1.concat(game.handP1)
+// game.cardsP1 = game.cardsP1.concat(game.handP2)
 console.log(game.cardsP1)
-
-
+*/
+game.flipCards(6)
+console.log("starting! length of p1:",game.cardsP1.length)
+    console.log("length of p2: ",game.cardsP2.length)
+    console.log("length of hand p1: ",game.handP1.length)
+    console.log("length of hand p2: ",game.handP2.length)
 //game.flipCards(1)
 while (!(game.cardsP1.length === 0) && !(game.cardsP2.length === 0) ) { //while both players have cards, i.e. !not = 0
     if (game.compareCards(0)) {
         game.flipCards(6)
     } 
-    console.log("iteration! value of first card in hand: ",game.handP1[0].value)
+    console.log("iteration! length of p1: /n",game.cardsP1.length)
+    console.log("length of p2: ",game.cardsP2.length)
+    console.log("length of hand p1: ",game.handP1.length)
+    console.log("length of hand p2: ",game.handP2.length)
     /* else {
         //WAR!
         if (game.inWar && inWarIndex < 3) {
