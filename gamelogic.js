@@ -75,18 +75,29 @@ endGame()
 
 // some logic from my memory card game: (edited to suit this game)
 
+class Card {
+    constructor(rank, suit, value, randomNum) {
+        this.rank = rank
+        this.suit = suit
+        this.value = value
+        this.randomNum = randomNum
+    }
+}
+
+
 let ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
 let suits = ["hearts","spades","clubs","diamonds"]
 let cards = [];
 
 for (let j=0; j<4; j++) {
 	for (let i=0; i<ranks.length; i++) {
-		cards[i+ranks.length*j] = {
-			rank: ranks[i],
-            suit: suits[j],
-            value: i+2, //doesn't actually matter if value: i or i+2
-			randomNum: Math.random()
-		}
+        cards[i+ranks.length*j] = new Card(ranks[i], suits[j], i+2, Math.random())
+        // {
+		// 	rank: ranks[i],
+        //     suit: suits[j],
+        //     value: i+2, //doesn't actually matter if value: i or i+2
+		// 	randomNum: Math.random()
+		// }
 	}
 }
 
