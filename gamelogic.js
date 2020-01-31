@@ -73,57 +73,6 @@ endGame()
 
 */
 
-// some logic from my memory card game: (edited to suit this game)
-
-class Card {
-    constructor(rank, suit, value, randomNum) {
-        this.rank = rank
-        this.suit = suit
-        this.value = value
-        this.randomNum = randomNum
-    }
-}
-
-
-let ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
-let suits = ["hearts","spades","clubs","diamonds"]
-let cards = [];
-
-for (let j=0; j<4; j++) {
-	for (let i=0; i<ranks.length; i++) {
-        cards[i+ranks.length*j] = new Card(ranks[i], suits[j], i+2, Math.random())
-        // {
-		// 	rank: ranks[i],
-        //     suit: suits[j],
-        //     value: i+2, //doesn't actually matter if value: i or i+2
-		// 	randomNum: Math.random()
-		// }
-	}
-}
-
-//each entry in the cards array is an object so in the sort function, a and b refer to each object entry and .randomNumber calls that property and sorts the cards array based on its random number.
-function shuffle(deck) {
-	return deck.sort(function(a,b){return (b.randomNum - a.randomNum)});
-}
-
-cards = shuffle(cards);
-
-let deckP1 = [];
-let deckP2 = [];
-
-for (let i = 0; i <cards.length; i++) {
-    if (i%2 == 0) {
-        deckP1.push(cards[i])
-    } else {
-        deckP2.push(cards[i])
-    }
-}
-
-// console.log(deckP1)
-// console.log(deckP2)
-
-
-
 
 class Card {
     constructor(suit,rank,score) {
@@ -144,27 +93,54 @@ class Deck {
         return this.cards.length
     }
 
+    shift() {
+        return this.cards.shift()
+    }
+
     draw() {
-        card = this.cards[Math.floor(Math.random()*52)]
+        let card = this.cards[Math.floor(Math.random()*this.length())]
         this.cards.splice(this.cards.indexOf(card),1)
         return card
+    }
+
+    push(card) {
+        this.cards.push(card)
+    }
+
+    fill() {
+      let ranks = ['Ace','2','3','4','5','6','7','8','9','10','Jack','Queen','King'];
+      let suits = ["hearts","spades","clubs","diamonds"]
+
+      for (let j=0; j<4; j++) {
+        for (let i=0; i<ranks.length; i++) {
+        this.cards.push( new Card(ranks[i], suits[j], i))
+        }
+      }
     }
 }
 
 const playDeck = new Deck() 
+playDeck.fill()
 
-let ranks = ['Ace','2','3','4','5','6','7','8','9','10','Jack','Queen','King'];
-let suits = ["hearts","spades","clubs","diamonds"]
+console.log(playDeck.length())
 
-for (let j=0; j<4; j++) {
-   for (let i=0; i<ranks.length; i++) {
-       playDeck.cards.push( new Card(ranks[i], suits[j], i))
-   }
+let deckP1 = new Deck();
+let deckP2 = new Deck();
+
+for (let i = 0; 0 < playDeck.length(); i++) {
+    if (i%2 == 0) {
+        deckP1.push(playDeck.draw())
+    } else {
+        deckP2.push(playDeck.draw())
+    }
 }
 
+console.log(deckP1.length())
+console.log(deckP2.length())
 
+console.log(playDeck.length())
 
-
+console.log(deckP1.cards)
 
 
 
@@ -175,23 +151,30 @@ for (let j=0; j<4; j++) {
 
 
 //zakk suggested game object when zack was asking a question
-let game = {
-    cardsP1: deckP1, //an array of objects
-    cardsP2: deckP2,
-    handP1: [], //subarray of object(s)
-    handP2: [],
-    flipCards: function(n=1) { //pass in n number of cards to take out, 1 usually
+//lets try for a class object!
+class Game {
+    constructor(deckP1, deckP2){
+        this.cardsP1 = deckP1, //object of class Deck containing cards array of objects (of class Card)
+        this.cardsP2 = deckP2,
+        this.handP1 = [], //subarray of object(s) in the card Class
+        this.handP2 = [],
+        this.inWar = false,
+        this.inWarIndex = 0
+    }
+    
+    
+    flipCards(n = 1) { //pass in n number of cards to take out, 1 usually
         for (let i = 0; i < n; i++) {
-            this.handP1.unshift(this.cardsP1[i])
+            this.handP1.unshift(this.cardsP1.cards[i])
             this.cardsP1.shift()
-            this.handP2.unshift(this.cardsP2[i])
+            this.handP2.unshift(this.cardsP2.cards[i])
             this.cardsP2.shift()
         }
-    },
-    compareCards: function(index=0) {
+    }
+    
+    compareCards(index = 0) {
         //return true if comparison was simple and hands assigned 
         //return false if tied game.handP1[0].value
-        //console.log("i'm inside the function! ", game.handP1[0].value )
         if (this.handP1[index].value >= this.handP2[index].value) {
             this.cardsP1 = this.cardsP1.concat(this.handP1)
             this.cardsP1 = this.cardsP1.concat(this.handP2)
@@ -209,31 +192,18 @@ let game = {
         } else {
             return false
         }
-    },
-    inWar: false,
-    inWarIndex: 0
+    }
 }
-// console.log(cardsP1[0])
-// console.log(cardsP2[0])
-// console.log(game.handP1)
-// console.log(game.handP2)
-// game.warCards()
-// console.log(game.handP1)
-/*
-console.log("first entry in cardsP1:")
-console.log(game.cardsP1[0])
 
 
+const game = new Game(deckP1, deckP2)
 
-console.log("handP1 after flipCards:")
-console.log(game.handP1[4].value)
-console.log("length of cardsP1")
-console.log(game.cardsP1)
-console.log("length of cardsP1 after concat")
-// game.cardsP1 = game.cardsP1.concat(game.handP1)
-// game.cardsP1 = game.cardsP1.concat(game.handP2)
-console.log(game.cardsP1)
-*/
+
+console.log("starting! length of p1:",game.cardsP1.length)
+    console.log("length of p2: ",game.cardsP2.length)
+    console.log("length of hand p1: ",game.handP1.length)
+    console.log("length of hand p2: ",game.handP2.length)
+
 game.flipCards(6)
 console.log("starting! length of p1:",game.cardsP1.length)
     console.log("length of p2: ",game.cardsP2.length)
