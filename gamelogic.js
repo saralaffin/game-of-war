@@ -117,6 +117,10 @@ class Deck {
         }
       }
     }
+
+    concat(arr) {
+        this.cards = this.cards.concat(arr)
+    }
 }
 
 const playDeck = new Deck() 
@@ -210,6 +214,8 @@ console.log("starting! length of p1:",game.cardsP1.length)
     console.log("length of hand p1: ",game.handP1.length)
     console.log("length of hand p2: ",game.handP2.length)
 //game.flipCards(1)
+
+
 while (!(game.cardsP1.length === 0) && !(game.cardsP2.length === 0) ) { //while both players have cards, i.e. !not = 0
     if (game.compareCards(0)) {
         game.flipCards(6)
