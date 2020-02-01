@@ -198,7 +198,7 @@ const game = new Game(deckP1, deckP2)
 
 
 let round = 0
-while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
+while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0) && round < 5000) {
     round++
     console.log(`Round ${round}`)
     game.flipCards(1)
@@ -236,8 +236,8 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
                     }
                 }
             }
-            game.inWar = false
-            game.cardsP1.cards = []
+            // game.inWar = false
+            // game.cardsP1.cards = []
 
         }
     }
