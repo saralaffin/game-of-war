@@ -155,11 +155,9 @@ class Game {
     
     flipCards(n = 1) { //pass in n number of cards to take out, 1 usually
         for (let i = 0; i < n; i++) {
-            this.handP1.unshift(this.cardsP1.cards[i])
-            this.cardsP1.shift()
-
-            this.handP2.unshift(this.cardsP2.cards[i])
-            this.cardsP2.shift()
+            this.handP1.unshift(this.cardsP1.shift())
+            
+            this.handP2.unshift(this.cardsP2.shift())
         }
     }
     
@@ -171,6 +169,7 @@ class Game {
         "index=" + index);
         if (this.handP1[index].value > this.handP2[index].value) {
             
+            // for (let i = 0; i > this.handP1 )
             this.cardsP1.concat(this.handP1)
             this.cardsP1.concat(this.handP2)
 
@@ -203,14 +202,21 @@ const game = new Game(deckP1, deckP2)
 // console.log("length of hand p2: ",game.handP2.length)
 
 
-game.flipCards(1)
+//game.flipCards(1)
 
 
 //while (!(game.cardsP1.length() === 0) && !(game.cardsP2.length() === 0) ) { //while both players have cards, i.e. !not = 0
 
-for (let i = 0; i < 5000; i++) {    
+for (let i = 0; i < 5000; i++) {   
+    // if done break;
+    if (game.cardsP1.length() === 0 || game.cardsP2.length() === 0) {
+        //i = 5000;
+        break;
+    }
+    game.flipCards(1) 
+
     if (game.compareCards(0)) {
-        game.flipCards(1)
+// do nothing
     } 
     else {
         //WAR!
