@@ -245,8 +245,13 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
     } 
     else {
         //WAR!
-        game.cardsP1.cards = []
+        game.inWar = true
+        while (game.inWar) {
+            console.log("i'm in the war!")
+            game.inWar = false
+            game.cardsP1.cards = []
 
+        }
     }
 
     console.log("length of hand p1: ",game.handP1.length)
