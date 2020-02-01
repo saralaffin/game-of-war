@@ -259,6 +259,11 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
                 for (let i = 0; i < numInWar; i++) {
                     //compare cards
                     console.log("I'm in the for loop! i: " + i)
+                    if (game.compareCards(i)) {
+                        game.inWar = false
+                        console.log(game.inWar)
+                        break
+                    }
                 }
                 console.log("i'm in the war! numInWar: " + numInWar)
             }
