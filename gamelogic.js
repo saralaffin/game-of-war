@@ -216,13 +216,18 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
         while (game.inWar) {
             numInWar = Math.min(3, game.cardsP1.length(), game.cardsP2.length())
             if ((numInWar === 0) && (game.cardsP1.length() > 0)) {
+                console.log("Player 1 wins the game!")
                 game.cardsP1.concat(game.handP1)
                 game.cardsP1.concat(game.handP2)
             } else if ((numInWar === 0) && (game.cardsP2.length() > 0)) {
+                console.log("Player 2 wins the game!")
                 game.cardsP2.concat(game.handP1)
                 game.cardsP2.concat(game.handP2)
             } else {
                 game.flipCards(numInWar)
+                console.log("War!")
+                console.log("Player 1's hand: ", game.handP1)
+                console.log("Player 2's hand: ", game.handP2)
                 for (let i = 0; i < numInWar; i++) {
                     //compare cards up to the number of cards we just added
                     if (game.compareCards(i)) {
@@ -232,14 +237,11 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
                     }
                 }
             }
-            game.inWar = false
-            game.cardsP1.cards = []
+            // game.inWar = false
+            // game.cardsP1.cards = []
 
         }
     }
-
-    console.log("length of hand p1: ",game.handP1.length)
-    console.log("length of hand p2: ",game.handP2.length)
 }
 console.log("I'm out the loop!")
 
