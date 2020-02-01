@@ -148,15 +148,16 @@ class Game {
         this.cardsP2 = deckP2,
         this.handP1 = [], //subarray of object(s) in the card Class
         this.handP2 = [],
-        this.inWar = false,
-        this.inWarIndex = 0
+        this.inWar = false
     }
     
     
     flipCards(n = 1) { //pass in n number of cards to take out, 1 usually
         for (let i = 0; i < n; i++) {
+            console.log("player 1 has " + this.cardsP1.length() + " cards")
             this.handP1.unshift(this.cardsP1.shift())
             
+            console.log("after flipping, player 1 has " + this.cardsP1.length() + " cards")
             this.handP2.unshift(this.cardsP2.shift())
         }
     }
@@ -196,10 +197,6 @@ class Game {
 const game = new Game(deckP1, deckP2)
 
 
-// console.log("starting! length of p1:",game.cardsP1.length())
-// console.log("length of p2: ",game.cardsP2.length())
-// console.log("length of hand p1: ",game.handP1.length)
-// console.log("length of hand p2: ",game.handP2.length)
 let round = 0
 while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
     round++
@@ -219,10 +216,12 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
                 console.log("Player 1 wins the game!")
                 game.cardsP1.concat(game.handP1)
                 game.cardsP1.concat(game.handP2)
+                game.inWar = false
             } else if ((numInWar === 0) && (game.cardsP2.length() > 0)) {
                 console.log("Player 2 wins the game!")
                 game.cardsP2.concat(game.handP1)
                 game.cardsP2.concat(game.handP2)
+                game.inWar = false
             } else {
                 game.flipCards(numInWar)
                 console.log("War!")
@@ -237,8 +236,8 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
                     }
                 }
             }
-            // game.inWar = false
-            // game.cardsP1.cards = []
+            game.inWar = false
+            game.cardsP1.cards = []
 
         }
     }
