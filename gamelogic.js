@@ -163,19 +163,16 @@ class Game {
     
     compareCards(index = 0) {
         //return true if comparison was simple and hands assigned 
-        //return false if tied game.handP1[0].value
-        console.log("handP1.length=" + this.handP1.length + "," +
-        "handP2.length=" + this.handP2.length + "," +  
-        "index=" + index);
+        //return false if tied 
         if (this.handP1[index].value > this.handP2[index].value) {
             
-            // for (let i = 0; i > this.handP1 )
             this.cardsP1.concat(this.handP1)
             this.cardsP1.concat(this.handP2)
 
             this.handP1 = []
             this.handP2 = []
 
+            console.log(`Player 1 wins round! and has ${game.cardsP1.length()} cards. Player 2 has ${game.cardsP2.length()} cards.`)
             
             return true
         } else if (this.handP1[index].value < this.handP2[index].value) {
@@ -184,6 +181,9 @@ class Game {
 
             this.handP1 = []
             this.handP2 = []
+
+            console.log(`Player 2 wins round! and has ${game.cardsP2.length()} cards. Player 1 has ${game.cardsP1.length()} cards.`)
+
             return true
         } else {
             return false
@@ -200,46 +200,13 @@ const game = new Game(deckP1, deckP2)
 // console.log("length of p2: ",game.cardsP2.length())
 // console.log("length of hand p1: ",game.handP1.length)
 // console.log("length of hand p2: ",game.handP2.length)
-
-
-//game.flipCards(1)
-
-
-//while (!(game.cardsP1.length() === 0) && !(game.cardsP2.length() === 0) ) { //while both players have cards, i.e. !not = 0
-
-/*for (let i = 0; i < 5000; i++) {   
-    // if done break;
-    if (game.cardsP1.length() === 0 || game.cardsP2.length() === 0) {
-        //i = 5000;
-        break;
-    }
-    game.flipCards(1) 
-
-    if (game.compareCards(0)) {
-// do nothing
-    } 
-    else {
-        //WAR!
-        if (game.inWar && game.inWarIndex < game.handP1.length) {
-            game.compareCards(game.inWarIndex)
-            game.inWarIndex++
-        } else {
-            game.inWar = true //and assign cards to hand
-            if ( (game.cardsP1.length() >= 3) && (game.cardsP2.length() >= 3) ) {
-                game.flipCards(3)
-            } else {
-                // else assign however many cards are left
-                game.flipCards(Math.min(game.cardsP1.length(), game.cardsP2.length()))
-            }
-        //compare cards and increase index
-        }
-    } 
-}
-*/
-
+let round = 0
 while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
-    console.log("I'm in the loop!")
+    round++
+    console.log(`Round ${round}`)
     game.flipCards(1)
+    console.log("Player 1's hand: ", game.handP1)
+    console.log("Player 2's hand: ", game.handP2)
     if (game.compareCards(0)) {
         // do nothing and loop will restart. Compare cards will assign all cards to winner's deck
     } 
@@ -257,15 +224,13 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
             } else {
                 game.flipCards(numInWar)
                 for (let i = 0; i < numInWar; i++) {
-                    //compare cards
-                    console.log("I'm in the for loop! i: " + i)
+                    //compare cards up to the number of cards we just added
                     if (game.compareCards(i)) {
                         game.inWar = false
                         console.log(game.inWar)
                         break
                     }
                 }
-                console.log("i'm in the war! numInWar: " + numInWar)
             }
             game.inWar = false
             game.cardsP1.cards = []
