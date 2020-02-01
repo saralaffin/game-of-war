@@ -239,6 +239,9 @@ const game = new Game(deckP1, deckP2)
 
 while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
     console.log("I'm in the loop!")
+    game.flipCards(1)
+    console.log("length of hand p1: ",game.handP1.length)
+    console.log("length of hand p2: ",game.handP2.length)
     game.cardsP1.cards = []
 }
 console.log("I'm out the loop!")
