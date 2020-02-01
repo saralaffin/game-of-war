@@ -75,10 +75,10 @@ endGame()
 
 
 class Card {
-    constructor(suit,rank,score) {
+    constructor(suit,rank,value) {
         this.suit = suit
         this.rank = rank
-        this.score = score
+        this.value = value
     }
 }
 
@@ -108,7 +108,7 @@ class Deck {
     }
 
     fill() {
-      let ranks = ['Ace','2','3','4','5','6','7','8','9','10','Jack','Queen','King'];
+      let ranks = ['2','3','4','5','6','7','8','9','10','Jack','Queen','King','Ace'];
       let suits = ["hearts","spades","clubs","diamonds"]
 
       for (let j=0; j<4; j++) {
@@ -117,7 +117,6 @@ class Deck {
         }
       }
     }
-
     concat(arr) {
         this.cards = this.cards.concat(arr)
     }
@@ -138,19 +137,6 @@ for (let i = 0; 0 < playDeck.length(); i++) {
         deckP2.push(playDeck.draw())
     }
 }
-
-console.log(deckP1.length())
-console.log(deckP2.length())
-
-console.log(playDeck.length())
-
-console.log(deckP1.cards)
-
-
-
-
-
-
 
 
 
@@ -180,15 +166,18 @@ class Game {
         //return true if comparison was simple and hands assigned 
         //return false if tied game.handP1[0].value
         if (this.handP1[index].value >= this.handP2[index].value) {
-            this.cardsP1 = this.cardsP1.concat(this.handP1)
-            this.cardsP1 = this.cardsP1.concat(this.handP2)
+            
+            this.cardsP1.concat(this.handP1)
+            this.cardsP1.concat(this.handP2)
 
             this.handP1 = []
             this.handP2 = []
+
+            
             return true
         } else if (this.handP1[index].value < this.handP2[index].value) {
-            this.cardsP2 = this.cardsP2.concat(this.handP1)
-            this.cardsP2 = this.cardsP2.concat(this.handP2)
+            this.cardsP2.concat(this.handP1)
+            this.cardsP2.concat(this.handP2)
 
             this.handP1 = []
             this.handP2 = []
@@ -197,33 +186,40 @@ class Game {
             return false
         }
     }
+    
 }
 
 
 const game = new Game(deckP1, deckP2)
 
 
-console.log("starting! length of p1:",game.cardsP1.length)
-    console.log("length of p2: ",game.cardsP2.length)
+console.log("starting! length of p1:",game.cardsP1.length())
+    console.log("length of p2: ",game.cardsP2.length())
     console.log("length of hand p1: ",game.handP1.length)
     console.log("length of hand p2: ",game.handP2.length)
 
 game.flipCards(6)
-console.log("starting! length of p1:",game.cardsP1.length)
-    console.log("length of p2: ",game.cardsP2.length)
+console.log("starting! length of p1:",game.cardsP1.length())
+    console.log("length of p2: ",game.cardsP2.length())
     console.log("length of hand p1: ",game.handP1.length)
     console.log("length of hand p2: ",game.handP2.length)
 //game.flipCards(1)
+game.compareCards(0)
 
+console.log(game.handP1.length)
+console.log(game.handP2.length)
 
-while (!(game.cardsP1.length === 0) && !(game.cardsP2.length === 0) ) { //while both players have cards, i.e. !not = 0
-    if (game.compareCards(0)) {
-        game.flipCards(6)
-    } 
-    console.log("iteration! length of p1: /n",game.cardsP1.length)
-    console.log("length of p2: ",game.cardsP2.length)
-    console.log("length of hand p1: ",game.handP1.length)
-    console.log("length of hand p2: ",game.handP2.length)
+console.log("length of p1:",game.cardsP1.length())
+    console.log("length of p2: ",game.cardsP2.length())
+
+// while (!(game.cardsP1.length === 0) && !(game.cardsP2.length === 0) ) { //while both players have cards, i.e. !not = 0
+//     if (game.compareCards(0)) {
+//         game.flipCards(6)
+//     } 
+//     console.log("iteration! length of p1: /n",game.cardsP1.length)
+//     console.log("length of p2: ",game.cardsP2.length)
+//     console.log("length of hand p1: ",game.handP1.length)
+//     console.log("length of hand p2: ",game.handP2.length)
     /* else {
         //WAR!
         if (game.inWar && inWarIndex < 3) {
@@ -239,8 +235,7 @@ while (!(game.cardsP1.length === 0) && !(game.cardsP2.length === 0) ) { //while 
             }
         //compare cards and increase index
     }  */
-}
+// }
 
 
-console.log(game.handP1.length)
-console.log(game.handP2.length)
+
