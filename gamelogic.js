@@ -207,7 +207,7 @@ const game = new Game(deckP1, deckP2)
 
 //while (!(game.cardsP1.length() === 0) && !(game.cardsP2.length() === 0) ) { //while both players have cards, i.e. !not = 0
 
-for (let i = 0; i < 5000; i++) {   
+/*for (let i = 0; i < 5000; i++) {   
     // if done break;
     if (game.cardsP1.length() === 0 || game.cardsP2.length() === 0) {
         //i = 5000;
@@ -235,7 +235,13 @@ for (let i = 0; i < 5000; i++) {
         }
     } 
 }
+*/
 
+while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
+    console.log("I'm in the loop!")
+    game.cardsP1.cards = []
+}
+console.log("I'm out the loop!")
 
 
 console.log("end! length of p1:",game.cardsP1.length())
