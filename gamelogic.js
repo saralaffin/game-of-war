@@ -166,7 +166,10 @@ class Game {
     compareCards(index = 0) {
         //return true if comparison was simple and hands assigned 
         //return false if tied game.handP1[0].value
-        if (this.handP1[index].value >= this.handP2[index].value) {
+        console.log("handP1.length=" + this.handP1.length + "," +
+        "handP2.length=" + this.handP2.length + "," +  
+        "index=" + index);
+        if (this.handP1[index].value > this.handP2[index].value) {
             
             this.cardsP1.concat(this.handP1)
             this.cardsP1.concat(this.handP2)
@@ -209,21 +212,22 @@ for (let i = 0; i < 5000; i++) {
     if (game.compareCards(0)) {
         game.flipCards(1)
     } 
-    /* else {
+    else {
         //WAR!
-        if (game.inWar && inWarIndex < 3) {
-            compareCards(game.inWarIndex)
-            inWarIndex++
+        if (game.inWar && game.inWarIndex < game.handP1.length) {
+            game.compareCards(game.inWarIndex)
+            game.inWarIndex++
         } else {
             game.inWar = true //and assign cards to hand
-            if ( (game.cardsP1.length >= 3) && (game.cardsP2.length >= 3) ) {
+            if ( (game.cardsP1.length() >= 3) && (game.cardsP2.length() >= 3) ) {
                 game.flipCards(3)
             } else {
                 // else assign however many cards are left
-                game.flipCards(Mat.max(game.cardsP1.length, game.cardsP2.length))
+                game.flipCards(Math.min(game.cardsP1.length(), game.cardsP2.length()))
             }
         //compare cards and increase index
-    }  */
+        }
+    } 
 }
 
 
