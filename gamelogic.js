@@ -256,6 +256,10 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
                 game.cardsP2.concat(game.handP2)
             } else {
                 game.flipCards(numInWar)
+                for (let i = 0; i < numInWar; i++) {
+                    //compare cards
+                    console.log("I'm in the for loop! i: " + i)
+                }
                 console.log("i'm in the war! numInWar: " + numInWar)
             }
             game.inWar = false
