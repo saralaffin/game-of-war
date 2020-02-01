@@ -247,7 +247,8 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
         //WAR!
         game.inWar = true
         while (game.inWar) {
-            console.log("i'm in the war!")
+            numInWar = Math.min(3, game.cardsP1.length(), game.cardsP2.length())
+            console.log("i'm in the war! numInWar: " + numInWar)
             game.inWar = false
             game.cardsP1.cards = []
 
