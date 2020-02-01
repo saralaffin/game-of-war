@@ -157,6 +157,7 @@ class Game {
         for (let i = 0; i < n; i++) {
             this.handP1.unshift(this.cardsP1.cards[i])
             this.cardsP1.shift()
+
             this.handP2.unshift(this.cardsP2.cards[i])
             this.cardsP2.shift()
         }
@@ -193,33 +194,21 @@ class Game {
 const game = new Game(deckP1, deckP2)
 
 
-console.log("starting! length of p1:",game.cardsP1.length())
-    console.log("length of p2: ",game.cardsP2.length())
-    console.log("length of hand p1: ",game.handP1.length)
-    console.log("length of hand p2: ",game.handP2.length)
+// console.log("starting! length of p1:",game.cardsP1.length())
+// console.log("length of p2: ",game.cardsP2.length())
+// console.log("length of hand p1: ",game.handP1.length)
+// console.log("length of hand p2: ",game.handP2.length)
 
-game.flipCards(6)
-console.log("starting! length of p1:",game.cardsP1.length())
-    console.log("length of p2: ",game.cardsP2.length())
-    console.log("length of hand p1: ",game.handP1.length)
-    console.log("length of hand p2: ",game.handP2.length)
-//game.flipCards(1)
-game.compareCards(0)
 
-console.log(game.handP1.length)
-console.log(game.handP2.length)
+game.flipCards(1)
 
-console.log("length of p1:",game.cardsP1.length())
-    console.log("length of p2: ",game.cardsP2.length())
 
-// while (!(game.cardsP1.length === 0) && !(game.cardsP2.length === 0) ) { //while both players have cards, i.e. !not = 0
-//     if (game.compareCards(0)) {
-//         game.flipCards(6)
-//     } 
-//     console.log("iteration! length of p1: /n",game.cardsP1.length)
-//     console.log("length of p2: ",game.cardsP2.length)
-//     console.log("length of hand p1: ",game.handP1.length)
-//     console.log("length of hand p2: ",game.handP2.length)
+//while (!(game.cardsP1.length() === 0) && !(game.cardsP2.length() === 0) ) { //while both players have cards, i.e. !not = 0
+
+for (let i = 0; i < 5000; i++) {    
+    if (game.compareCards(0)) {
+        game.flipCards(1)
+    } 
     /* else {
         //WAR!
         if (game.inWar && inWarIndex < 3) {
@@ -235,7 +224,10 @@ console.log("length of p1:",game.cardsP1.length())
             }
         //compare cards and increase index
     }  */
-// }
+}
 
 
+
+console.log("end! length of p1:",game.cardsP1.length())
+console.log("length of p2: ",game.cardsP2.length())
 
