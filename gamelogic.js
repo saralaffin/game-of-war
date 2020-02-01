@@ -248,7 +248,16 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0)) {
         game.inWar = true
         while (game.inWar) {
             numInWar = Math.min(3, game.cardsP1.length(), game.cardsP2.length())
-            console.log("i'm in the war! numInWar: " + numInWar)
+            if ((numInWar === 0) && (game.cardsP1.length() > 0)) {
+                game.cardsP1.concat(game.handP1)
+                game.cardsP1.concat(game.handP2)
+            } else if ((numInWar === 0) && (game.cardsP2.length() > 0)) {
+                game.cardsP2.concat(game.handP1)
+                game.cardsP2.concat(game.handP2)
+            } else {
+                game.flipCards(numInWar)
+                console.log("i'm in the war! numInWar: " + numInWar)
+            }
             game.inWar = false
             game.cardsP1.cards = []
 
