@@ -25,4 +25,5 @@ Additionally, your project should meet the following requirements:
 
 ## Acknowledgments
 * Instructors and TA's at GA in DC
+* My brother for help finding my bugs and teaching me how to write better flow charts and pseudo code
 * Google searchs
