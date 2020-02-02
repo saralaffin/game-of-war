@@ -108,12 +108,12 @@ class Deck {
     }
 
     fill() {
-      let ranks = ['2','3','4','5','6','7','8','9','10','Jack','Queen','King','Ace'];
+      let ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
       let suits = ["\u2665","\u2663","\u2660","\u2666"]
 
       for (let j=0; j<4; j++) {
         for (let i=0; i<ranks.length; i++) {
-        this.cards.push( new Card(ranks[i], suits[j], i))
+        this.cards.push( new Card( suits[j], ranks[i], i))
         }
       }
     }
@@ -199,15 +199,38 @@ class Game {
 
     print(card1, card2) {
 
-        console.log("   Player 1  ____,_")
-        console.log(`~~~~~~~~~~~ /  ${card1.value}${card1.suit} ^\\ `)
-        console.log("~~~~~~~~~  /\\______/ ")
-        console.log("~~~~~~~~~~~~  `   ` ")
+        let r1 = card1.rank;
+        if(r1.length === 1){
+            r1 = " " + r1;
+        }
+        let r2 = card2.rank;
+        if(r2.length === 1){
+            r2 = " " + r2;
+        }
+        var template =`
+        #########################################
+        #                                       #
+        #    Player 1  ____,_                   #    
+        # ~~~~~~~~~~~ / ${r1}${card1.suit} ^\\                  #         
+   xxx  # ~~~~~~~~~  /\\______/                  #    
+        # ~~~~~~~~~~~~  \`   \`                   #   
+        #                   _,____  Player 2    #                 
+        #                  /^${r2}${card2.suit}  \\ ~~~~~~~~~~~ #                     
+        #                  \\______/\\  ~~~~~~~~~ #                    
+        #                    \`   \`  ~~~~~~~~~~~ #                     
+        #                                       #              
+        #########################################`;
 
-        console.log("                  _,____  Player 2")
-        console.log(`                 /^ ${card2.value}${card2.suit}  \\ ~~~~~~~~~~~ `)
-        console.log("                 \\______/\\  ~~~~~~~~~")
-        console.log("                   `   `  ~~~~~~~~~~~~")
+        console.log(template);
+        // console.log("   Player 1  ____,_")
+        // console.log(`~~~~~~~~~~~ /  ${card1.value}${card1.suit} ^\\ `)
+        // console.log("~~~~~~~~~  /\\______/ ")
+        // console.log("~~~~~~~~~~~~  `   ` ")
+
+        // console.log("                  _,____  Player 2")
+        // console.log(`                 /^ ${card2.value}${card2.suit}  \\ ~~~~~~~~~~~ `)
+        // console.log("                 \\______/\\  ~~~~~~~~~")
+        // console.log("                   `   `  ~~~~~~~~~~~~")
     }
     
 }
@@ -221,8 +244,7 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0) && round < 5
     round++
     console.log(`Round ${round}`)
     game.flipCards(1)
-    console.log("Player 1's hand: ", game.handP1)
-    console.log("Player 2's hand: ", game.handP2)
+    game.print(game.handP1[0],game.handP2[0])
     if (game.compareCards(0)) {
         // do nothing and loop will restart. Compare cards will assign all cards to winner's deck
     } 
