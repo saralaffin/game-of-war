@@ -198,24 +198,23 @@ class Game {
     }
 
     print(card1, card2) {
-
-        let r1 = card1.rank;
-        if(r1.length === 1){
-            r1 = " " + r1;
+        let vars = [card1.rank, card2.rank, this.cardsP1.length()+this.handP1.length, this.cardsP2.length()+this.handP2.length]
+        // vars = [rank1, rank2, cardsLeft1, cardsLeft2]
+        
+        for (let i = 0 ; i < vars.length; i++) {
+            vars[i] = " " + vars[i];
+            vars[i] = vars[i].padStart(3)
         }
-        let r2 = card2.rank;
-        if(r2.length === 1){
-            r2 = " " + r2;
-        }
+        
         var template =`%c                                                                     
               # # # # # # # # # # # # # # # # # # # # #              
               #                                       #              
               #    Player 1  ____,_                   #              
-   52 cards   # ~~~~~~~~~~~ / ${r1}${card1.suit} ^\\                  #              
+  ${vars[2]} cards   # ~~~~~~~~~~~ /${vars[0]}${card1.suit} ^\\                  #              
      left     # ~~~~~~~~~  /\\______/                  #              
               # ~~~~~~~~~~~~  \`   \`                   #              
-              #                   _,____  Player 2    #   10 cards   
-              #                  /^${r2}${card2.suit}  \\ ~~~~~~~~~~~ #     left     
+              #                   _,____  Player 2    #  ${vars[3]} cards   
+              #                  /^${vars[1]}${card2.suit} \\ ~~~~~~~~~~~ #     left     
               #                  \\______/\\  ~~~~~~~~~ #              
               #                    \`   \`  ~~~~~~~~~~~ #              
               #                                       #              
