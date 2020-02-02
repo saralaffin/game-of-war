@@ -289,3 +289,5 @@ console.log("I'm out the loop!")
 console.log("end! length of p1:",game.cardsP1.length())
 console.log("length of p2: ",game.cardsP2.length())
 
+//playing with colors! from: https://coderwall.com/p/fskzdw/colorful-console-log
+console.log('%c the green hulk got mad!', 'color: green; font-weight: bold; background: linear-gradient(0deg, red, yellow)');
