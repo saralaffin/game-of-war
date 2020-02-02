@@ -207,30 +207,22 @@ class Game {
         if(r2.length === 1){
             r2 = " " + r2;
         }
-        var template =`
-        #########################################
-        #                                       #
-        #    Player 1  ____,_                   #    
-        # ~~~~~~~~~~~ / ${r1}${card1.suit} ^\\                  #         
-   xxx  # ~~~~~~~~~  /\\______/                  #    
-        # ~~~~~~~~~~~~  \`   \`                   #   
-        #                   _,____  Player 2    #                 
-        #                  /^${r2}${card2.suit}  \\ ~~~~~~~~~~~ #                     
-        #                  \\______/\\  ~~~~~~~~~ #                    
-        #                    \`   \`  ~~~~~~~~~~~ #                     
-        #                                       #              
-        #########################################`;
+        var template =`%c                                                                     
+              # # # # # # # # # # # # # # # # # # # # #              
+              #                                       #              
+              #    Player 1  ____,_                   #              
+   52 cards   # ~~~~~~~~~~~ / ${r1}${card1.suit} ^\\                  #              
+     left     # ~~~~~~~~~  /\\______/                  #              
+              # ~~~~~~~~~~~~  \`   \`                   #              
+              #                   _,____  Player 2    #   10 cards   
+              #                  /^${r2}${card2.suit}  \\ ~~~~~~~~~~~ #     left     
+              #                  \\______/\\  ~~~~~~~~~ #              
+              #                    \`   \`  ~~~~~~~~~~~ #              
+              #                                       #              
+              #########################################              
+                                                                     `;
 
-        console.log(template);
-        // console.log("   Player 1  ____,_")
-        // console.log(`~~~~~~~~~~~ /  ${card1.value}${card1.suit} ^\\ `)
-        // console.log("~~~~~~~~~  /\\______/ ")
-        // console.log("~~~~~~~~~~~~  `   ` ")
-
-        // console.log("                  _,____  Player 2")
-        // console.log(`                 /^ ${card2.value}${card2.suit}  \\ ~~~~~~~~~~~ `)
-        // console.log("                 \\______/\\  ~~~~~~~~~")
-        // console.log("                   `   `  ~~~~~~~~~~~~")
+        console.log(template, 'color: white; font-weight: bold; background: linear-gradient(90deg, red, orange, green, blue, violet, purple)');
     }
     
 }
@@ -290,4 +282,4 @@ console.log("end! length of p1:",game.cardsP1.length())
 console.log("length of p2: ",game.cardsP2.length())
 
 //playing with colors! from: https://coderwall.com/p/fskzdw/colorful-console-log
-console.log('%c the green hulk got mad!', 'color: green; font-weight: bold; background: linear-gradient(0deg, red, yellow)');
+//console.log('%c the green hulk got mad!', 'color: green; font-weight: bold; background: linear-gradient(0deg, red, yellow)');
