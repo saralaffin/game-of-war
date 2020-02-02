@@ -196,6 +196,19 @@ class Game {
             return false
         }
     }
+
+    print(card1, card2) {
+
+        console.log("   Player 1  ____,_")
+        console.log(`~~~~~~~~~~~ /  ${card1.value}${card1.suit} ^\\ `)
+        console.log("~~~~~~~~~  /\\______/ ")
+        console.log("~~~~~~~~~~~~  `   ` ")
+
+        console.log("                  _,____  Player 2")
+        console.log(`                 /^ ${card2.value}${card2.suit}  \\ ~~~~~~~~~~~ `)
+        console.log("                 \\______/\\  ~~~~~~~~~")
+        console.log("                   `   `  ~~~~~~~~~~~~")
+    }
     
 }
 
