@@ -221,6 +221,25 @@ class Game {
 
         console.log(template, 'color: white; font-weight: bold; background: linear-gradient(90deg, red, orange, green, blue, violet, purple)');
     }
+
+    printWar(numInWar) {
+        let warTemplate = `%c                                                                     
+            # # # # # # # # # # # # # # # # # # # # #              
+            #                                       #              
+            #  Player 1                   Player 2  #              `
+        for (let i = 0; i < numInWar; i++) {
+            warTemplate += `
+            #           ____,_     _,____           #              
+            # ~~~~~~~~ |  ${this.handP1[i].rank}${this.handP1[i].suit} ^\\   /^ ${this.handP2[i].rank}${this.handP2[i].suit}  | ~~~~~~~~ #              
+            # ~~~~~~  /|______/   \\______|\\  ~~~~~~ #              
+            # ~~~~~~~~~  \`   \`     \`   \`  ~~~~~~~~~ #              
+            #                                       #              `
+        }
+        warTemplate += `
+            # # # # # # # # # # # # # # # # # # # # #              `
+
+            console.log(warTemplate, 'color: white; font-weight: bold; background: linear-gradient(90deg, red, orange, green, blue, violet, purple)');
+    }
     
 }
 
@@ -255,8 +274,9 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0) && round < 5
             } else {
                 game.flipCards(numInWar)
                 console.log("War!")
-                console.log("Player 1's hand: ", game.handP1)
-                console.log("Player 2's hand: ", game.handP2)
+                game.printWar(numInWar)
+                // console.log("Player 1's hand: ", game.handP1)
+                // console.log("Player 2's hand: ", game.handP2)
                 for (let i = 0; i < numInWar; i++) {
                     //compare cards up to the number of cards we just added
                     if (game.compareCards(i)) {
