@@ -223,20 +223,27 @@ class Game {
     }
 
     printWar(numInWar) {
-        let warTemplate = `%c                                                                     
+        let warTemplate = `%c                                                                   
             # # # # # # # # # # # # # # # # # # # # #              
             #                                       #              
             #  Player 1                   Player 2  #              `
         for (let i = 0; i < numInWar; i++) {
+            let vars = [this.handP1[i].rank, this.handP2[i].rank]
+            for (let i = 0 ; i < vars.length; i++) {
+                vars[i] = " " + vars[i];
+                vars[i] = vars[i].padStart(3)
+            }
+
             warTemplate += `
             #           ____,_     _,____           #              
-            # ~~~~~~~~ |  ${this.handP1[i].rank}${this.handP1[i].suit} ^\\   /^ ${this.handP2[i].rank}${this.handP2[i].suit}  | ~~~~~~~~ #              
+            # ~~~~~~~~ |${vars[0]}${this.handP1[i].suit} ^\\   /^${vars[1]}${this.handP2[i].suit} | ~~~~~~~~ #              
             # ~~~~~~  /|______/   \\______|\\  ~~~~~~ #              
             # ~~~~~~~~~  \`   \`     \`   \`  ~~~~~~~~~ #              
             #                                       #              `
         }
         warTemplate += `
-            # # # # # # # # # # # # # # # # # # # # #              `
+            # # # # # # # # # # # # # # # # # # # # #              
+                                                                   `
 
             console.log(warTemplate, 'color: white; font-weight: bold; background: linear-gradient(90deg, red, orange, green, blue, violet, purple)');
     }
