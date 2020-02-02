@@ -154,10 +154,8 @@ class Game {
     
     flipCards(n = 1) { //pass in n number of cards to take out, 1 usually
         for (let i = 0; i < n; i++) {
-            console.log("player 1 has " + this.cardsP1.length() + " cards")
             this.handP1.unshift(this.cardsP1.shift())
             
-            console.log("after flipping, player 1 has " + this.cardsP1.length() + " cards")
             this.handP2.unshift(this.cardsP2.shift())
         }
     }
@@ -233,7 +231,7 @@ const game = new Game(deckP1, deckP2)
 let round = 0
 while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0) && round < 5000) {
     round++
-    console.log(`Round ${round}`)
+    console.log(`%c                Round ${round}                                              `,'color: white; font-weight: bold; background: linear-gradient(90deg, red, orange, green, blue, violet, purple)')
     game.flipCards(1)
     game.print(game.handP1[0],game.handP2[0])
     if (game.compareCards(0)) {
