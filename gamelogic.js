@@ -109,7 +109,7 @@ class Deck {
 
     fill() {
       let ranks = ['2','3','4','5','6','7','8','9','10','Jack','Queen','King','Ace'];
-      let suits = ["hearts","spades","clubs","diamonds"]
+      let suits = ["\u2665","\u2663","\u2660","\u2666"]
 
       for (let j=0; j<4; j++) {
         for (let i=0; i<ranks.length; i++) {
