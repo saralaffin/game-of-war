@@ -166,9 +166,15 @@ class Game {
         //return true if comparison was simple and hands assigned 
         //return false if tied 
         if (this.handP1[index].value > this.handP2[index].value) {
+            let decider = Math.random()
+            if (decider > 0.5) {
+                this.cardsP1.concat(this.handP1)
+                this.cardsP1.concat(this.handP2)
+            } else {
+                this.cardsP1.concat(this.handP2)
+                this.cardsP1.concat(this.handP1)
+            }
             
-            this.cardsP1.concat(this.handP1)
-            this.cardsP1.concat(this.handP2)
 
             this.handP1 = []
             this.handP2 = []
