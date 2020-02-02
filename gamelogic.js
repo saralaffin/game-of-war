@@ -177,7 +177,7 @@ class Game {
             this.handP1 = []
             this.handP2 = []
 
-            console.log(`Player 1 wins round! and has ${game.cardsP1.length()} cards. Player 2 has ${game.cardsP2.length()} cards.`)
+            console.log(`Player 1 wins round!`)
             
             return true
         } else if (this.handP1[index].value < this.handP2[index].value) {
@@ -187,7 +187,7 @@ class Game {
             this.handP1 = []
             this.handP2 = []
 
-            console.log(`Player 2 wins round! and has ${game.cardsP2.length()} cards. Player 1 has ${game.cardsP1.length()} cards.`)
+            console.log(`Player 2 wins round!`)
 
             return true
         } else {
@@ -208,13 +208,13 @@ class Game {
               # # # # # # # # # # # # # # # # # # # # #              
               #                                       #              
               #    Player 1  ____,_                   #              
-  ${vars[2]} cards   # ~~~~~~~~~~~ /${vars[0]}${card1.suit} ^\\                  #              
-     left     # ~~~~~~~~~  /\\______/                  #              
+  ${vars[2]} cards   # ~~~~~~~~~~~ |${vars[0]}${card1.suit} ^\\                  #              
+     left     # ~~~~~~~~~  /|______/                  #              
               # ~~~~~~~~~~~~  \`   \`                   #              
               #                   _,____  Player 2    #  ${vars[3]} cards   
-              #                  /^${vars[1]}${card2.suit} \\ ~~~~~~~~~~~ #     left     
-              #                  \\______/\\  ~~~~~~~~~ #              
-              #                    \`   \`  ~~~~~~~~~~~ #              
+              #                  /^${vars[1]}${card2.suit} | ~~~~~~~~~~~ #     left     
+              #                  \\______|\\  ~~~~~~~~~ #              
+              #                   \`   \`  ~~~~~~~~~~~~ #              
               #                                       #              
               #########################################              
                                                                      `;
@@ -231,7 +231,9 @@ const game = new Game(deckP1, deckP2)
 let round = 0
 while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0) && round < 5000) {
     round++
-    console.log(`%c                Round ${round}                                              `,'color: white; font-weight: bold; background: linear-gradient(90deg, red, orange, green, blue, violet, purple)')
+    let roundFormatted = " " + round
+    roundFormatted = roundFormatted.padStart(6)
+    console.log(`%c   Round${roundFormatted}                        `,'color: white; font-weight: bold; font-size: 20px; background: linear-gradient(90deg, red, orange, green, blue, violet, purple)')
     game.flipCards(1)
     game.print(game.handP1[0],game.handP2[0])
     if (game.compareCards(0)) {
@@ -243,12 +245,10 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0) && round < 5
         while (game.inWar) {
             numInWar = Math.min(3, game.cardsP1.length(), game.cardsP2.length())
             if ((numInWar === 0) && (game.cardsP1.length() > 0)) {
-                console.log("Player 1 wins the game!")
                 game.cardsP1.concat(game.handP1)
                 game.cardsP1.concat(game.handP2)
                 game.inWar = false
-            } else if ((numInWar === 0) && (game.cardsP2.length() > 0)) {
-                console.log("Player 2 wins the game!")
+            } else if ((numInWar === 0) && (game.cardsP2.length() > 0)) {                
                 game.cardsP2.concat(game.handP1)
                 game.cardsP2.concat(game.handP2)
                 game.inWar = false
@@ -272,11 +272,28 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0) && round < 5
         }
     }
 }
-console.log("I'm out the loop!")
+let winner;
+if (game.cardsP1.length() > game.cardsP2.length()) {
+    winner = 1
+} else {
+    winner = 2
+}
+let template = `%c                                                                     
+              # # # # # # # # # # # # # # # # # # # # #              
+              #                                       #              
+              #  Player ${winner} WINS!                       #              
+              #              ____________             #              
+              # ~~~~~~~~~~~ |            |            #              
+              # ~~~~~~~~~~~ |          ^_|_^          #              
+              # ~~~~~~~~~  /|         / . . \\         #              
+              # ~~~~~~~~~~/ |_________\\_>.<_/         #              
+              # ~~~~~~~~~~~~ u u        u u           #              
+              #                                       #              
+              #                                       #              
+              # # # # # # # # # # # # # # # # # # # # #              
+                                                                     `;
 
-
-console.log("end! length of p1:",game.cardsP1.length())
-console.log("length of p2: ",game.cardsP2.length())
+console.log(template, 'color: white; font-weight: bold; background: linear-gradient(90deg, red, orange, green, blue, violet, purple)')
 
 //playing with colors! from: https://coderwall.com/p/fskzdw/colorful-console-log
 //console.log('%c the green hulk got mad!', 'color: green; font-weight: bold; background: linear-gradient(0deg, red, yellow)');
