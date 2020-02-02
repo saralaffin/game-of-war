@@ -216,7 +216,7 @@ class Game {
               #                  \\______|\\  ~~~~~~~~~ #              
               #                   \`   \`  ~~~~~~~~~~~~ #              
               #                                       #              
-              #########################################              
+              # # # # # # # # # # # # # # # # # # # # #              
                                                                      `;
 
         console.log(template, 'color: white; font-weight: bold; background: linear-gradient(90deg, red, orange, green, blue, violet, purple)');
