@@ -223,10 +223,10 @@ class Game {
     }
 
     printWar(numInWar) {
-        let warTemplate = `%c                                                                   
-            # # # # # # # # # # # # # # # # # # # # #              
-            #                                       #              
-            #  Player 1                   Player 2  #              `
+        let warTemplate = `%c                                                                     
+              # # # # # # # # # # # # # # # # # # # # #              
+              #                                       #              
+              #  Player 1                   Player 2  #              `
         for (let i = 0; i < numInWar; i++) {
             let vars = [this.handP1[i].rank, this.handP2[i].rank]
             for (let i = 0 ; i < vars.length; i++) {
@@ -235,15 +235,15 @@ class Game {
             }
 
             warTemplate += `
-            #           ____,_     _,____           #              
-            # ~~~~~~~~ |${vars[0]}${this.handP1[i].suit} ^\\   /^${vars[1]}${this.handP2[i].suit} | ~~~~~~~~ #              
-            # ~~~~~~  /|______/   \\______|\\  ~~~~~~ #              
-            # ~~~~~~~~~  \`   \`     \`   \`  ~~~~~~~~~ #              
-            #                                       #              `
+              #           ____,_     _,____           #              
+              # ~~~~~~~~ |${vars[0]}${this.handP1[i].suit} ^\\   /^${vars[1]}${this.handP2[i].suit} | ~~~~~~~~ #              
+              # ~~~~~~  /|______/   \\______|\\  ~~~~~~ #              
+              # ~~~~~~~~~  \`   \`     \`   \`  ~~~~~~~~~ #              
+              #                                       #              `
         }
         warTemplate += `
-            # # # # # # # # # # # # # # # # # # # # #              
-                                                                   `
+              # # # # # # # # # # # # # # # # # # # # #              
+                                                                     `
 
             console.log(warTemplate, 'color: white; font-weight: bold; background: linear-gradient(90deg, red, orange, green, blue, violet, purple)');
     }
@@ -280,15 +280,12 @@ while ((game.cardsP1.length() != 0) && (game.cardsP2.length() != 0) && round < 5
                 game.inWar = false
             } else {
                 game.flipCards(numInWar)
-                console.log("War!")
+                console.log(`%c   WAR!!!          `,'color: white; font-weight: bold; font-size: 40px; background: linear-gradient(90deg, red, orange, green, blue, violet, purple)')
                 game.printWar(numInWar)
-                // console.log("Player 1's hand: ", game.handP1)
-                // console.log("Player 2's hand: ", game.handP2)
                 for (let i = 0; i < numInWar; i++) {
                     //compare cards up to the number of cards we just added
                     if (game.compareCards(i)) {
                         game.inWar = false
-                        console.log(game.inWar)
                         break
                     }
                 }

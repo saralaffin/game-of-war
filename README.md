@@ -1,6 +1,9 @@
 # game-of-war
 Project 2 in General Assembly SEI35 in Washington, DC. Given the requirements below by GA.
 
+## Getting started
+To see the website, click [here](https://saralaffin.github.io/game-of-war)
+
 ## Requirements
 To play, each player reveals the top card in their stack. The player who played the card with the higher rank (Aces high) takes both cards and puts them at the bottom of their stack in an arbitrary order.
 
